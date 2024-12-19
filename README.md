@@ -29,14 +29,14 @@
 
 https://github.com/prasanthrangan/hyprdots/assets/106020512/7f8fadc8-e293-4482-a851-e9c6464f5265
 
-<br><div align="center"><img width="12%" src="Source/assets/Arch.svg"/><br></div>
+<br><div align="center"><img width="18%" src="Source/assets/Arch.svg"/> <img style="margin-right: 10px" width="16%" src="https://em-content.zobj.net/source/apple/391/handshake_1f91d.png">&ensp;&ensp;&ensp;<img width="16.5%" src="https://avatars.githubusercontent.com/u/4604537?s=200&v=4"/></div>
 
 <a id="installation"></a>  
 <img src="Source/assets/Installation.gif" width="200"/>
 ---
 
-The installation script is designed for a minimal [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) install, but **may** work on some [Arch-based distros](https://wiki.archlinux.org/title/Arch-based_distributions).
-While installing HyDE alongside another [DE](https://wiki.archlinux.org/title/Desktop_environment)/[WM](https://wiki.archlinux.org/title/Window_manager) should work, due to it being a heavily customized setup, it **will** conflict with your [GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) theming, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB), etc. and is at your own risk.
+This repository contains configuration files and scripts for setting up the [HyDE](https://github.com/prasanthrangan/hyprdots) environment on Ubuntu, but **may** work on some [Debian/Ubuntu-based distros](https://www.debian.org/derivatives/). The setup has been ported from a minimal [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) configuration, with adjustments to work within the [Ubuntu](https://wiki.ubuntu.com/) ecosystem.
+While installing [HyDE](https://github.com/prasanthrangan/hyprdots) alongside another [DE](https://wiki.debian.org/DesktopEnvironment)/[WM](https://wiki.debian.org/WindowManager) should work, due to it being a heavily customized setup, it **will** conflict with your [GTK](https://wiki.debian.org/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) theming, [Shell](https://wiki.debian.org/Shell), [SDDM](https://wiki.debian.org/SDDM), [GRUB](https://wiki.debian.org/Grub), etc. and is at your own risk.
 
 For Nixos support there is a separate project being maintained @ [Hydenix](https://github.com/richen604/hydenix/tree/main)
 
