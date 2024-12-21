@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 #|---/ /+------------------------------+---/ /|#
 #|--/ /-| Script to patch custom theme |--/ /-|#
 #|-/ /--| Adapted for Ubuntu           |-/ /--|#
