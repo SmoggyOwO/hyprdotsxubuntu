@@ -50,7 +50,9 @@ For Nixos support there is a separate project being maintained @ [Hydenix](https
 To install, execute the following commands:
 
 ```shell
-WILL BE AVAILABLE SOON
+git clone --depth 1 https://github.com/SmoggyOwO/hyprdotsxubuntu 
+cd hyprdotsxubuntu/Scripts
+./install.sh
 ```
 
 > [!TIP]
@@ -60,11 +62,11 @@ WILL BE AVAILABLE SOON
 > WILL BE AVAILABLE SOON
 > ```
 
-As a second install option, you can also use `Hyde-install`, which might be easier for some.
-View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).
-
-Please reboot after the install script completes and takes you to the SDDM login screen (or black screen) for the first time.
-For more details, please refer to the [installation wiki](https://github.com/prasanthrangan/hyprdots/wiki/Installation).
+<!--As a second install option, you can also use `Hyde-install`, which might be easier for some.-->
+<!--View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).-->
+<!---->
+<!--Please reboot after the install script completes and takes you to the SDDM login screen (or black screen) for the first time.-->
+<!--For more details, please refer to the [installation wiki](https://github.com/prasanthrangan/hyprdots/wiki/Installation).-->
 
 <a id="updating"></a>  
 <img src="Source/assets/Updating.gif" width="200"/>
@@ -73,7 +75,9 @@ For more details, please refer to the [installation wiki](https://github.com/pra
 To update HyDE, you will need to pull the latest changes from GitHub and restore the configs by running the following commands:
 
 ```shell
-WILL BE AVAILABLE SOON
+cd ~/hyprdotsxubuntu/Scripts
+git pull
+./install.sh -r
 ```
 
 > [!IMPORTANT]
