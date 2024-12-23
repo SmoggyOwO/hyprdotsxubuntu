@@ -104,10 +104,22 @@ EOF
     
     shift $((OPTIND - 1))
     cust_pkg=$1
-    cp "${scrDir}/custom_pkgs.lst" "${scrDir}/install_pkg.lst"
+    cp "${scrDir}/custom_hypr.lst" "${scrDir}/install_pkg.lst"
 
     if [ -f "${cust_pkg}" ] && [ ! -z "${cust_pkg}" ]; then
         cat "${cust_pkg}" >> "${scrDir}/install_pkg.lst"
+    fi
+
+    if ! chk_list "myShell" "${shlList[@]}"; then
+        echo -e "Select shell:\n[1] zsh\n[2] fish"
+        prompt_timer 120 "Enter option number"
+
+        case "${promptIn}" in
+            1) export myShell="zsh" ;;
+            2) export myShell="fish" ;;
+            *) echo -e "...Invalid option selected..." ; exit 1 ;;
+        esac
+        echo "${myShell}" >> "${scrDir}/install_pkg.lst"
     fi
 
     #----------------------#
@@ -115,7 +127,7 @@ EOF
     #----------------------#
     
     sudo apt update
-    xargs -a "${scrDir}/install_pkg.lst" -r sudo apt install ${use_default}
+    "${scrDir}/install_pkg.sh" "${scrDir}/install_pkg.lst"
     rm "${scrDir}/install_pkg.lst"
 fi
 
