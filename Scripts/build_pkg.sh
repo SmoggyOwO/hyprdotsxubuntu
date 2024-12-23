@@ -126,35 +126,35 @@ build_and_install "https://github.com/Kistler-Group/sdbus-cpp" \
 "mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release ${OTHER_CONFIG_FLAGS} && cmake --build . && sudo cmake --build . --target install" \
 "sdbus-cpp"
 
-# 2. Build hyprlang
+# 2. Build hyprutils
+build_and_install "https://github.com/hyprwm/hyprutils" \
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build" \
+"hyprutils"
+
+# 3. Build hyprlang
 build_and_install "https://github.com/hyprwm/hyprlang" \
 "cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprlang -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build" \
 "hyprlang"
 
-# 3. Build hyprland-protocols
+# 4. Build hyprland-protocols
 build_and_install "https://github.com/hyprwm/hyprland-protocols" \
 "meson setup build && ninja -C build && ninja -C build install" \
 "hyprland-protocols"
 
-# 4. Build hyprwayland-scanner
+# 5. Build hyprwayland-scanner
 build_and_install "https://github.com/hyprwm/hyprwayland-scanner" \
 "cmake -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build -j \`nproc\` && sudo cmake --install build" \
 "hyprwayland-scanner"
 
-# 5. Build hyprgraphics
+# 6. Build hyprgraphics
 build_and_install "https://github.com/hyprwm/hyprgraphics" \
 "cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build" \
 "hyprgraphics"
 
-# 6. Build hyprcursor
+# 7. Build hyprcursor
 build_and_install "https://github.com/hyprwm/hyprcursor" \
 "cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install build" \
 "hyprcursor"
-
-# 7. Build hyprutils
-build_and_install "https://github.com/hyprwm/hyprutils" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build" \
-"hyprutils"
 
 # 8. Build swww
 build_and_install "https://github.com/LGFae/swww" \
