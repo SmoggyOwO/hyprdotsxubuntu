@@ -22,7 +22,7 @@ qml-module-qtquick-controls                           # QML module for QtQuick c
 qml-module-qtgraphicaleffects                         # QML module for graphical effects
 
 # --------------------------------------------------- // Window Manager
-hyprland                                               # wlroots-based Wayland compositor
+#hyprland                                               # wlroots-based Wayland compositor
 dunst                                                  # Notification daemon
 waybar                                                 # System bar
 grim                                                   # Screenshot tool
