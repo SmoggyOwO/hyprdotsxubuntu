@@ -91,7 +91,18 @@ install_dependencies() {
         wayland-protocols \
         libglvnd-dev \
         libsystemd-dev \
-        libdisplay-info-dev
+        libdisplay-info-dev \
+        libjxl-dev \
+        libjxl-tools \
+        libmagic-dev \
+        librsvg2-dev \
+        libxcb-util-dev \
+        libpipewire-0.3-dev \
+        libspa-0.2-dev \
+        libre2-dev \
+        libxcb-errors0 \
+        libxcb-errors-dev \
+        libudis86-dev
 }
 
 # Function to build and install a package
@@ -123,78 +134,63 @@ install_dependencies
 
 # 1. Build sdbus-cpp
 build_and_install "https://github.com/Kistler-Group/sdbus-cpp" \
-"mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release ${OTHER_CONFIG_FLAGS} && cmake --build . && sudo cmake --build . --target install" \
-"sdbus-cpp"
+"mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release ${OTHER_CONFIG_FLAGS} && cmake --build . && sudo cmake --build . --target install"
 
 # 2. Build hyprutils
 build_and_install "https://github.com/hyprwm/hyprutils" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build" \
-"hyprutils"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build"
 
 # 3. Build hyprlang
 build_and_install "https://github.com/hyprwm/hyprlang" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprlang -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build" \
-"hyprlang"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprlang -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build"
 
 # 4. Build hyprland-protocols
 build_and_install "https://github.com/hyprwm/hyprland-protocols" \
-"meson setup build && ninja -C build && ninja -C build install" \
-"hyprland-protocols"
+"meson setup build && ninja -C build && ninja -C build install"
 
 # 5. Build hyprwayland-scanner
 build_and_install "https://github.com/hyprwm/hyprwayland-scanner" \
-"cmake -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build -j \`nproc\` && sudo cmake --install build" \
-"hyprwayland-scanner"
+"cmake -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build -j \`nproc\` && sudo cmake --install build"
 
 # 6. Build hyprgraphics
 build_and_install "https://github.com/hyprwm/hyprgraphics" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build" \
-"hyprgraphics"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf NPROCESSORS_CONF\` && sudo cmake --install build"
 
 # 7. Build hyprcursor
 build_and_install "https://github.com/hyprwm/hyprcursor" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install build" \
-"hyprcursor"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install build"
 
 # 8. Build swww
 build_and_install "https://github.com/LGFae/swww" \
-"cargo build --release && sudo cp target/release/swww /usr/local/bin/ && sudo cp target/release/swww-daemon /usr/local/bin/" \
-"swww"
+"cargo build --release && sudo cp target/release/swww /usr/local/bin/ && sudo cp target/release/swww-daemon /usr/local/bin/"
 
 # 9. Build rofi
 build_and_install "https://github.com/lbonn/rofi" \
-"meson setup build && ninja -C build && ninja -C build install" \
-"rofi"
+"meson setup build && ninja -C build && ninja -C build install"
 
 # 10. Build swaylock-effects
 build_and_install "https://github.com/mortie/swaylock-effects" \
-"meson build && ninja -C build && sudo ninja -C build install" \
-"swaylock-effects"
+"meson build && ninja -C build && sudo ninja -C build install"
 
 # 11. Build hyprpicker
 build_and_install "https://github.com/hyprwm/hyprpicker" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprpicker -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build" \
-"hyprpicker"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprpicker -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build"
 
 # 12. Build aquamarine
 build_and_install "https://github.com/hyprwm/aquamarine" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\`" \
-"aquamarine"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build"
 
 # 13. Build ImageMagick
 build_and_install "https://github.com/ImageMagick/ImageMagick" \
-"./configure && make && sudo make install" \
-"ImageMagick"
+"./configure && make && sudo make install"
 
 # 14. Build xdg-desktop-portal-hyprland
 build_and_install "https://github.com/hyprwm/xdg-desktop-portal-hyprland" \
-"cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build && sudo cmake --install build" \
-"xdg-desktop-portal-hyprland"
+"cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build && sudo cmake --install build"
 
 # 15. Build hyprland
 build_and_install "https://github.com/hyprwm/Hyprland" \
-"make all && sudo make install" \
-"Hyprland"
+"make all && sudo make install"
 
 #--------------------------------------#
 # Completion message                   #
