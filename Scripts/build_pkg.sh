@@ -9,8 +9,16 @@ set -e  # Exit immediately if a command exits with a non-zero status
 
 HOME_DIR=$HOME
 
+
 install_dependencies() {
-    sudo apt update && \
+    # Enable multiverse and universe repositories
+    sudo add-apt-repository universe
+    sudo add-apt-repository multiverse
+
+    # Update package lists
+    sudo apt update
+
+    # Install required dependencies
     sudo apt install -y \
         cargo \
         pkg-config \
@@ -31,7 +39,47 @@ install_dependencies() {
         qt6-base-dev \
         libdrm-dev \
         libgbm-dev \
-        libsdbus-c++-dev
+        libsdbus-c++-dev \
+        meson \
+        wget \
+        build-essential \
+        ninja-build \
+        cmake-extras \
+        cmake \
+        gettext \
+        gettext-base \
+        fontconfig \
+        libfontconfig-dev \
+        libffi-dev \
+        libxml2-dev \
+        libxkbcommon-dev \
+        libxkbregistry-dev \
+        libpixman-1-dev \
+        libudev-dev \
+        libseat-dev \
+        seatd \
+        libxcb-dri3-dev \
+        libegl-dev \
+        libgles2 \
+        libegl1-mesa-dev \
+        glslang-tools \
+        libinput-bin \
+        libinput-dev \
+        libxcb-composite0-dev \
+        libavutil-dev \
+        libavcodec-dev \
+        libavformat-dev \
+        libxcb-ewmh2 \
+        libxcb-ewmh-dev \
+        libxcb-present-dev \
+        libxcb-icccm4-dev \
+        libxcb-render-util0-dev \
+        libxcb-res0-dev \
+        libxcb-xinput-dev \
+        libtomlplusplus3 \
+        libzip-dev \
+        gir1.2-rsvg-2.0 \
+        libtomlplusplus-dev
 }
 
 # Function to build and install a package
@@ -71,41 +119,53 @@ build_and_install "https://github.com/lbonn/rofi" \
 build_and_install "https://github.com/mortie/swaylock-effects" \
 "meson build && ninja -C build && sudo ninja -C build install"
 
-# 4. Build hyprutils
+#4. Build sdbus-cpp
+build_and_install "https://github.com/Kistler-Group/sdbus-cpp" \
+"mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release ${OTHER_CONFIG_FLAGS} && cmake --build . && sudo cmake --build . --target install"
+
+# 5. Build hyprutils
 build_and_install "https://github.com/hyprwm/hyprutils" \
 "cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF` && sudo cmake --install build"
 
-# 5. Build hyprwayland-scanner
+# 6. Build hyprwayland-scanner
 build_and_install "https://github.com/hyprwm/hyprwayland-scanner" \
 "cmake -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build -j `nproc` && sudo cmake --install build"
 
-# 6. Build hyprlang
+# 7. Build hyprlang
 build_and_install "https://github.com/hyprwm/hyprlang" \
 "cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprlang -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF` && sudo cmake --install ./build"
 
-# 7. Build hyprland-protocols
+# 8. Build hyprland-protocols
 build_and_install "https://github.com/hyprwm/hyprland-protocols" \
 "meson setup build && ninja -C build && ninja -C build install"
 
-#8. Build sdbus-cpp
-build_and_install "https://github.com/Kistler-Group/sdbus-cpp" \
-"mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Release ${OTHER_CONFIG_FLAGS} && cmake --build . && sudo cmake --build . --target install"  
+# 9. Build hyprgraphics
+build_and_install "https://github.com/hyprwm/hyprgraphics" \
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF` && sudo cmake --install build"
 
-# 9. Build hyprpicker
+# 10. Build hyprcursor
+build_and_install "https://github.com/hyprwm/hyprcursor" \
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF` && sudo cmake --install build"
+
+# 11. Build aquamarine
+build_and_install "https://github.com/hyprwm/aquamarine" \
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target all -j`nproc 2>/dev/null || getconf _NPROCESSORS_CONF`"
+
+# 12. Build hyprpicker
 build_and_install "https://github.com/hyprwm/hyprpicker" \
-"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && \
- cmake --build ./build --config Release --target hyprpicker -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && \
- sudo cmake --install ./build"
+"cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr -S . -B ./build && cmake --build ./build --config Release --target hyprpicker -j\`nproc 2>/dev/null || getconf _NPROCESSORS_CONF\` && sudo cmake --install ./build"
 
-# 10. Build ImageMagick
+# 13. Build ImageMagick
 build_and_install "https://github.com/ImageMagick/ImageMagick" \
 "./configure && make && sudo make install"
 
-# 11. Build xdg-desktop-portal-hyprland
+# 14. Build xdg-desktop-portal-hyprland
 build_and_install "https://github.com/hyprwm/xdg-desktop-portal-hyprland" \
-"git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland && cd xdg-desktop-portal-hyprland && \
- cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build && \
- cmake --build build && sudo cmake --install build"
+"cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build && cmake --build build && sudo cmake --install build"
+
+# 15. Build hyprland
+build_and_install "https://github.com/hyprwm/Hyprland" \
+"make all && sudo make install"
 
 #--------------------------------------#
 # Completion message                   #
